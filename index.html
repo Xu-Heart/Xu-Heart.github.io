@@ -159,7 +159,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
+      <a class="article-title" href="/2020/02/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">使用hexo 搭建个人博客</a>
     </h1>
   
 
@@ -172,10 +172,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>第一章</p>
-<hr>
-<p>第二章</p>
+        <p>1.安装nodejs<br>2.安装git<br>3.安装hexo<br>更改镜像源：</p>
+<p>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>全局安装hexo</p>
+<p>cnpm install -g hexo-cli</p>
+<p>新建blog目录， 以后自己的博客就放在这个目录下</p>
+<p>mkdir blog</p>
+<p>使用hexo初始化blog目录</p>
+<p>cd blog<br>hexo init</p>
+<p>在本地浏览博客</p>
+<p>hexo s</p>
+<p>将博客推送到远端，以便大家都能访问。<br>1.在github上新建项目， 注意项目名称必须是：你的github名称.github.io 。</p>
+<p>2.打开新建的项目， 选择setting， 下滑到github pages</p>
+<p>3.修改blog目录下的配置文件_config.yml，添加下面的内容：<br>deploy:<br>  type: git<br>  repo: <a href="https://github.com/Xu-Heart/Xu-Heart.github.io.git" target="_blank" rel="noopener">https://github.com/Xu-Heart/Xu-Heart.github.io.git</a><br>  branch: master</p>
+<pre><code>1.</code></pre><p>下载把博客部署到远端需要用到的插件<br>cnpm install –save hexo-deployer-git</p>
 
       
 
