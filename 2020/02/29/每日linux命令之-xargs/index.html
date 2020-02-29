@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://xu-heart.github.io">
-  <title>每日linux命令之之--xargs | Hexo</title>
+  <title>每日linux命令之-xargs | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="xargs: 这个命令是在产生某个命令的参数的意思。xargs可以读入stdin的数据，并且以空格符或断行符进行分辨， 将stdin的数据分割成为arguments。因为是以空格符作为分割，所以，如果有一些文件名或者其他意义的名词内含有空格符的时候，xargs可能就会误判了。">
+  <meta name="description" content="xargs: 这个命令是在产生某个命令的参数的意思。xargs可以读入stdin的数据，并且以空格符或断行符进行分辨， 将stdin的数据分割成为arguments。因为是以空格符作为分割，所以，如果有一些文件名或者其他意义的名词内含有空格符的时候，xargs可能就会误判了。使用xargs的原因在于，很多命令其实并不支持管道命令，因此我们可以通过xargs来提供该命令引用standard inpu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每日linux命令之之--xargs">
-<meta property="og:url" content="https://xu-heart.github.io/2020/02/29/%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E4%B9%8B-xargs/index.html">
+<meta property="og:title" content="每日linux命令之-xargs">
+<meta property="og:url" content="https://xu-heart.github.io/2020/02/29/%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4%E4%B9%8B-xargs/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="xargs: 这个命令是在产生某个命令的参数的意思。xargs可以读入stdin的数据，并且以空格符或断行符进行分辨， 将stdin的数据分割成为arguments。因为是以空格符作为分割，所以，如果有一些文件名或者其他意义的名词内含有空格符的时候，xargs可能就会误判了。">
+<meta property="og:description" content="xargs: 这个命令是在产生某个命令的参数的意思。xargs可以读入stdin的数据，并且以空格符或断行符进行分辨， 将stdin的数据分割成为arguments。因为是以空格符作为分割，所以，如果有一些文件名或者其他意义的名词内含有空格符的时候，xargs可能就会误判了。使用xargs的原因在于，很多命令其实并不支持管道命令，因此我们可以通过xargs来提供该命令引用standard inpu">
 <meta property="og:locale" content="中文">
 <meta property="article:published_time" content="2020-02-29T05:35:00.000Z">
-<meta property="article:modified_time" content="2020-02-29T05:40:29.481Z">
+<meta property="article:modified_time" content="2020-02-29T06:12:25.896Z">
 <meta property="article:author" content="xuhansong">
 <meta name="twitter:card" content="summary">
   
@@ -154,19 +154,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-每日linux命令之之-xargs" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-每日linux命令之-xargs" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      每日linux命令之之--xargs
+      每日linux命令之-xargs
     </h1>
   
 
         
-        <a href="/2020/02/29/%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E4%B9%8B-xargs/" class="archive-article-date">
+        <a href="/2020/02/29/%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4%E4%B9%8B-xargs/" class="archive-article-date">
   	<time datetime="2020-02-29T05:35:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-29</time>
 </a>
         
@@ -174,7 +174,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>xargs: 这个命令是在产生某个命令的参数的意思。xargs可以读入stdin的数据，并且以空格符或断行符进行分辨， 将stdin的数据分割成为arguments。因为是以空格符作为分割，所以，如果有一些文件名或者其他意义的名词内含有空格符的时候，xargs可能就会误判了。</p>
+        <p>xargs: 这个命令是在产生某个命令的参数的意思。xargs可以读入stdin的数据，并且以空格符或断行符进行分辨， 将stdin的数据分割成为arguments。因为是以空格符作为分割，所以，如果有一些文件名或者其他意义的名词内含有空格符的时候，xargs可能就会误判了。<br>使用xargs的原因在于，很多命令其实并不支持管道命令，因此我们可以通过xargs来提供该命令引用<br>standard input 之用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find &#x2F;sbin -perm +7000 | xargs ls -l 			&#x2F;&#x2F;该命令的作用就是找出&#x2F;sbin 下面具有特殊权限的文件名， 因为ls不是管道命令， 所以就使用到另外xargs命令来提供该命令引用standard input 之用。</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -254,7 +256,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://xu-heart.github.io/2020/02/29/%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4%E4%B9%8B%E4%B9%8B-xargs/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://xu-heart.github.io/2020/02/29/%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4%E4%B9%8B-xargs/" alt="微信分享二维码">
     </div>
 </div>
 
