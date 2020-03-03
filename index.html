@@ -152,6 +152,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-sed工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/03/sed%E5%B7%A5%E5%85%B7/">sed工具</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/03/sed%E5%B7%A5%E5%85%B7/" class="archive-article-date">
+  	<time datetime="2020-03-03T08:06:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sed本身是一个管道命令，可以用来分析标准输入，sed还可以将数据进行替换、删除、新增、选取特定行等功能。</p>
+<pre><code>sed [-nefr] [动作]
+
+-n: 使用安静模式，只有经过sed特殊处理的那一行才会被显示出来。
+-e: 直接再命令行模式上进行sed的动作编辑。
+-f: 直接将sed的动作写在一个文件内，-f filename 则可以执行filename内的sed动作。
+-r: sed的动作支持的是扩展型正则表达式的语法，默认是基础正则表达式语法。
+-i: 直接修改读取的文件内容，而不是由屏幕输出。
+
+动作说明:[n1[,n2]] function
+n1,n2 不见得会存在，一般代表选择进行动作的行数。
+function有下面这些参数:
+a : 新增，a的后面可以接字符串，而这些字符串会在新的一行出现(目前的下一行)。
+c : 替换，c的后面可以接字符串，这些字符串可以替换n1，n2之间的行。
+d : 删除, 因为是删除，所以d后面通常不接任何参数。
+i : 插入，i的后面可以接字符串，而这些字符串会在新的一行出现(目前的上一行)。
+p : 打印, 也就是将某个选择的数据打印出来，通常p会与sed -n一起运行。
+s : 替换，可以直接进行替换的工作。通常这个s的动作可以搭配正则表达式！例如1,20s/old/new/g。
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/03/sed%E5%B7%A5%E5%85%B7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-基础正则表达式练习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
