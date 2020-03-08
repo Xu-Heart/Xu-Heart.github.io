@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://xu-heart.github.io">
   <title>awk:好用的数据处理工具 | hansong&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="awk是一个很好的数据处理工具，相比于sed常常作用于一整行的处理，awk则比较倾向于将一行分成数个“字段”来处理。因此，awk相当适合处理小型的数据数据处理呢!awk通常运行模式是这样的:awk &#39;条件类型1{动作1} 条件类型2{动作2} ...&#39; filenameawk 后面接两个单引号并加上大括号{}来设置想要对数据进行的处理动作。awk可以处理后续接的文件，也可以读取来自">
+  <meta name="description" content="awk是一个很好的数据处理工具，相比于sed常常作用于一整行的处理，awk则比较倾向于将一行分成数个“字段”来处理。因此，awk相当适合处理小型的数据数据处理呢!awk通常运行模式是这样的: 1awk &#39;条件类型1&amp;#123;动作1&amp;#125; 条件类型2&amp;#123;动作2&amp;#125; ...&#39; filename awk 后面接两个单引号并加上大括号{}来设置想要对数据进行的处理动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="awk:好用的数据处理工具">
 <meta property="og:url" content="https://xu-heart.github.io/2020/03/07/awk-%E5%A5%BD%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="hansong&#39;s blog">
-<meta property="og:description" content="awk是一个很好的数据处理工具，相比于sed常常作用于一整行的处理，awk则比较倾向于将一行分成数个“字段”来处理。因此，awk相当适合处理小型的数据数据处理呢!awk通常运行模式是这样的:awk &#39;条件类型1{动作1} 条件类型2{动作2} ...&#39; filenameawk 后面接两个单引号并加上大括号{}来设置想要对数据进行的处理动作。awk可以处理后续接的文件，也可以读取来自">
+<meta property="og:description" content="awk是一个很好的数据处理工具，相比于sed常常作用于一整行的处理，awk则比较倾向于将一行分成数个“字段”来处理。因此，awk相当适合处理小型的数据数据处理呢!awk通常运行模式是这样的: 1awk &#39;条件类型1&amp;#123;动作1&amp;#125; 条件类型2&amp;#123;动作2&amp;#125; ...&#39; filename awk 后面接两个单引号并加上大括号{}来设置想要对数据进行的处理动">
 <meta property="og:locale" content="中文">
 <meta property="article:published_time" content="2020-03-07T08:43:58.000Z">
-<meta property="article:modified_time" content="2020-03-08T09:13:19.195Z">
+<meta property="article:modified_time" content="2020-03-08T09:16:48.208Z">
 <meta property="article:author" content="xuhansong">
 <meta name="twitter:card" content="summary">
   
@@ -174,28 +174,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>awk是一个很好的数据处理工具，相比于sed常常作用于一整行的处理，awk则比较倾向于将一行分成数个“字段”来处理。<br>因此，awk相当适合处理小型的数据数据处理呢!awk通常运行模式是这样的:<br><code>awk &#39;条件类型1{动作1} 条件类型2{动作2} ...&#39; filename</code><br>awk 后面接两个单引号并加上大括号{}来设置想要对数据进行的处理动作。awk可以处理后续接的文件，也可以读取来自前个命令的standaroutput。但如前面说的，awk主要是处理每一行的字段内的数据，而默认的字段的分隔符为空格键或[tab]键。</p>
-<p>`<br>xhs@ubuntu-14:~$ last -n 5 | awk ‘{print $1 “\t” $3}’<br>xhs     192.168.213.1<br>xhs     192.168.213.1<br>xhs     192.168.213.1<br>xhs     192.168.213.1<br>xhs     192.168.213.1</p>
-<p>wtmp    Sat<br>`</p>
+        <p>awk是一个很好的数据处理工具，相比于sed常常作用于一整行的处理，awk则比较倾向于将一行分成数个“字段”来处理。<br>因此，awk相当适合处理小型的数据数据处理呢!awk通常运行模式是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;条件类型1&#123;动作1&#125; 条件类型2&#123;动作2&#125; ...&#39; filename</span><br></pre></td></tr></table></figure>
+<p>awk 后面接两个单引号并加上大括号{}来设置想要对数据进行的处理动作。awk可以处理后续接的文件，也可以读取来自前个命令的standaroutput。但如前面说的，awk主要是处理每一行的字段内的数据，而默认的字段的分隔符为空格键或[tab]键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xhs@ubuntu-14:~$ last -n 5 | awk &#39;&#123;print $1 &quot;\t&quot; $3&#125;&#39;</span><br><span class="line">xhs     192.168.213.1</span><br><span class="line">xhs     192.168.213.1</span><br><span class="line">xhs     192.168.213.1</span><br><span class="line">xhs     192.168.213.1</span><br><span class="line">xhs     192.168.213.1</span><br><span class="line"></span><br><span class="line">wtmp    Sat</span><br></pre></td></tr></table></figure>
+
 <p>上面是awk最常使用的动作。通过print的功能将字段数据列出来。字段的分割符则以空格键或[tab]键来隔开。由上面这个例子可以知道，每一行的每个字段都是有变量名称的，那就是$1,$2等变量名称。以上面的例子来说，root是$1,因为它是第一列嘛!至于192.168.1.100是第三列，所以它就是$3，而$0就是代表一整行数据的意思。<br>由此可知，awk的处理流程是:<br>1.读入第一行，并将第一行的数据填入$0,$1,$2等变量当中;<br>2.依据条件类型的限制，判断是否需要进行后面的动作;<br>3.做完所有的动作于条件类型;<br>4.若还有后续的”行”的数据，则重复1~3的步骤，直到所有的数据都读完为止。<br>由此，我们可以知道，awk是以行为一次处理的单位，而以字段为最小的处理单位。<br>另外，我们还需要知道awk的内置变量代表的意义:<br>NF     每一行($0)拥有的字段总数<br>NR     目前awk所处理的是”第几行”数据<br>FS     目前的分隔字符，默认是空格键。</p>
-<p><code>xhs@ubuntu-14:~$ last -n 5 | awk &#39;{print $1 &quot;\t lines: &quot; NR&quot;\t columes: &quot; NF}&#39;
-xhs      lines: 1        columes: 10
-xhs      lines: 2        columes: 10
-xhs      lines: 3        columes: 10
-xhs      lines: 4        columes: 10
-xhs      lines: 5        columes: 10
-         lines: 6        columes: 0
-wtmp     lines: 7        columes: 7</code></p>
-<h2 id="awk的逻辑运算符"><a href="#awk的逻辑运算符" class="headerlink" title="awk的逻辑运算符"></a>awk的逻辑运算符</h2><p>在/etc/passwd 当中是以”:” 冒号作为字段的分隔，该文件中第一字段为账号，第三字段则是UID。假设我要查询，第三列小于10以下的数据，并且仅列出账号于第三列,那么可以这样做:<br>`<br>xhs@ubuntu-14:~$ cat /etc/passwd | awk ‘{FS=”:”} $3 &lt; 10 {print $1 “\t “ $3}’<br>root:x:0:0:root:/root:/bin/bash<br>daemon   1<br>bin      2<br>sys      3<br>sync     4<br>games    5</p>
-<p>`</p>
-<p>使用awk来进行计算:<br>例如，我们有下面这样的文件pay.txt,<br><code>Name       1st      2nd     3th
-VBird       23000   24000   25000
-DMTsai      21000   20000   23000
-Bird2       43000   42000   41000</code><br>当我们要计算每个人的总额时，就可以使用下面的命令:</p>
-<p>`<br>cat pay.txt | awk ‘NR==1{printf “%10s %10s %10s %10s %10s\n”,$1,$2,$3,$4,”Total”}</p>
-<blockquote>
-<p>NR&gt;=2{total = $2 + $3 + $4<br>printf “%10s %10d %10d %10d %10.2f\n”, $1, $2, $3, $4, total}’<br>      Name        1st        2nd        3th      Total<br>     VBird      23000      24000      25000   72000.00<br>    DMTsai      21000      20000      23000   64000.00<br>     Bird2      43000      42000      41000  126000.00<br>`</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xhs@ubuntu-14:~$ last -n 5 | awk &#39;&#123;print $1 &quot;\t lines: &quot; NR&quot;\t columes: &quot; NF&#125;&#39;</span><br><span class="line">xhs      lines: 1        columes: 10</span><br><span class="line">xhs      lines: 2        columes: 10</span><br><span class="line">xhs      lines: 3        columes: 10</span><br><span class="line">xhs      lines: 4        columes: 10</span><br><span class="line">xhs      lines: 5        columes: 10</span><br><span class="line">         lines: 6        columes: 0</span><br><span class="line">wtmp     lines: 7        columes: 7</span><br></pre></td></tr></table></figure>
+<h2 id="awk的逻辑运算符"><a href="#awk的逻辑运算符" class="headerlink" title="awk的逻辑运算符"></a>awk的逻辑运算符</h2><p>在/etc/passwd 当中是以”:” 冒号作为字段的分隔，该文件中第一字段为账号，第三字段则是UID。假设我要查询，第三列小于10以下的数据，并且仅列出账号于第三列,那么可以这样做:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">xhs@ubuntu-14:~$ cat &#x2F;etc&#x2F;passwd | awk &#39;&#123;FS&#x3D;&quot;:&quot;&#125; $3 &lt; 10 &#123;print $1 &quot;\t &quot; $3&#125;&#39;</span><br><span class="line">root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;bash</span><br><span class="line">daemon   1</span><br><span class="line">bin      2</span><br><span class="line">sys      3</span><br><span class="line">sync     4</span><br><span class="line">games    5</span><br></pre></td></tr></table></figure>
+
+<p>使用awk来进行计算:<br>例如，我们有下面这样的文件pay.txt,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Name       1st      2nd     3th</span><br><span class="line">VBird       23000   24000   25000</span><br><span class="line">DMTsai      21000   20000   23000</span><br><span class="line">Bird2       43000   42000   41000</span><br></pre></td></tr></table></figure>
+<p>当我们要计算每个人的总额时，就可以使用下面的命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat pay.txt | awk &#39;NR&#x3D;&#x3D;1&#123;printf &quot;%10s %10s %10s %10s %10s\n&quot;,$1,$2,$3,$4,&quot;Total&quot;&#125;</span><br><span class="line">&gt; NR&gt;&#x3D;2&#123;total &#x3D; $2 + $3 + $4</span><br><span class="line">&gt; printf &quot;%10s %10d %10d %10d %10.2f\n&quot;, $1, $2, $3, $4, total&#125;&#39;</span><br><span class="line">      Name        1st        2nd        3th      Total</span><br><span class="line">     VBird      23000      24000      25000   72000.00</span><br><span class="line">    DMTsai      21000      20000      23000   64000.00</span><br><span class="line">     Bird2      43000      42000      41000  126000.00</span><br></pre></td></tr></table></figure>
 
       
 
