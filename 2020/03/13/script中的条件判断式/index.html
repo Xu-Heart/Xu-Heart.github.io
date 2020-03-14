@@ -16,7 +16,7 @@
 <meta property="og:description" content="利用if…then 单层、简单条件判断式如果只有一个判断式要进行，那么我们可以简单的这样看: 123if [ 条件判断式 ]; then    当条件判断式成立时，可以进行的命令工作内容;fi &lt;&#x3D;&#x3D; 将if反过来写，就成为fi，结束if之意。 下面的代码是使用if… then 条件判断式的一个简单的举例： 1234567891011121314151617#!&amp;#x2F">
 <meta property="og:locale" content="中文">
 <meta property="article:published_time" content="2020-03-13T04:47:48.000Z">
-<meta property="article:modified_time" content="2020-03-13T07:13:42.647Z">
+<meta property="article:modified_time" content="2020-03-14T02:36:01.672Z">
 <meta property="article:author" content="xuhansong">
 <meta name="twitter:card" content="summary">
   
@@ -185,7 +185,12 @@
 
 </li>
 </ul>
-<h2 id="利用case…esac判断"><a href="#利用case…esac判断" class="headerlink" title="利用case…esac判断"></a>利用case…esac判断</h2>
+<h2 id="利用case…esac判断"><a href="#利用case…esac判断" class="headerlink" title="利用case…esac判断"></a>利用case…esac判断</h2><p>if…then…fi对于变量的判断是以比较的方式来分辨的，如果符合状态就进行某些行为，并且通过较多层次(就是elif)的方式来进行多个变量的程序代码缩写。如果万一我有多个既定的变量内容，就只要针对特定变量来设置状态就好了，在这种情况下，就用case…in…esac。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">case $变量名称 in		&lt;&#x3D;&#x3D; 关键字为case，还有变量前有$</span><br><span class="line">  &quot;第一个变量内容&quot;) 		&lt;&#x3D;&#x3D;每个变量内容建议用双括号括起来，关键字则为小括号</span><br><span class="line">  程序段</span><br><span class="line">  ;;				&lt;&#x3D;&#x3D;每个类型结尾使用两个连续的分号来处理！</span><br><span class="line">  &quot;第二个变量内容&quot;)</span><br><span class="line">  程序段</span><br><span class="line">  ;;</span><br><span class="line">  \*)				&lt;&#x3D;&#x3D;最后一个变量内容都会用\*来代表所有其他值</span><br><span class="line">  不包含第一个变量内容与第二个变量内容的其他程序执行段</span><br><span class="line">  exit 1</span><br><span class="line">  ;;</span><br><span class="line">esac				&lt;&#x3D;&#x3D;最终的case结尾! &quot;反过来写&quot;思考一下</span><br></pre></td></tr></table></figure>
+
+
+
+
       
 
       
