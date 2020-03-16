@@ -16,7 +16,7 @@
 <meta property="og:description" content="除了if…then…fi这种条件判断式之外，循环可能是程序中最重要的一环了。 while do done, until do done(不定循环)一般来说，不定循环最常见的就是下面这两种状态了: 12345while [ condition ]   &lt;&#x3D;&#x3D;中括号内的状态就是判断式do		&lt;&#x3D;&#x3D;do是循环的开始 	程序段落done		&lt;&amp;#x">
 <meta property="og:locale" content="中文">
 <meta property="article:published_time" content="2020-03-15T09:06:22.000Z">
-<meta property="article:modified_time" content="2020-03-15T09:36:36.350Z">
+<meta property="article:modified_time" content="2020-03-16T12:35:58.561Z">
 <meta property="article:author" content="xuhansong">
 <meta name="twitter:card" content="summary">
   
@@ -185,7 +185,15 @@
 
 <p>示例:until</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line"></span><br><span class="line">#Program</span><br><span class="line">#   Repeat question until user input correct answer.</span><br><span class="line"></span><br><span class="line">until [ &quot;$yn&quot; &#x3D;&#x3D; &quot;yes&quot; -o &quot;$yn&quot; &#x3D;&#x3D; &quot;YES&quot; ]</span><br><span class="line">do</span><br><span class="line">    read -p &quot;Please input yes&#x2F;YES to stop this program: &quot; yn</span><br><span class="line">done</span><br><span class="line">echo &quot;OK! you input the correct answer.&quot;</span><br></pre></td></tr></table></figure>
-
+<h2 id="固定循环-for…do…done"><a href="#固定循环-for…do…done" class="headerlink" title="固定循环(for…do…done)"></a>固定循环(for…do…done)</h2><p>相对于while,until的循环方式是必须要“符合某个条件”的状态，for这种语法则是“已经知道要进行几次循环”的状态！它的语法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for var in con1 con2 con3...</span><br><span class="line">do </span><br><span class="line">	程序段</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>1.第一次循环时，$var的内容为con1<br>2.第二次循环时，$var的内容为con2<br>3.第三次循环时，$var的内容为con3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## for...do...done的数值处理</span><br><span class="line">除了上述的方法之外，for循环还有另外一种写法。语法如下：</span><br></pre></td></tr></table></figure>
+<p>for ((初始值; 限制值; 执行步长))<br>do<br>    程序段<br>done</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">举例：</span><br></pre></td></tr></table></figure>
+<p>#!/bin/bash<br>read -p “Please input a number, I will count for 1+2+…+you_input:” nu</p>
+<p>s=0<br>for ((i=1; i&lt;=$nu; i=i+1))<br>do<br>    s=$(($s+$i))<br>done<br>echo “The result of ‘1+2+3+…+$nu’ is ==&gt; $s”</p>
+<pre><code></code></pre>
       
 
       
