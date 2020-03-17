@@ -191,6 +191,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">举例：</span><br></pre></td></tr></table></figure>
 <p>#!/bin/bash<br>read -p “Please input a number, I will count for 1+2+…+you_input:” nu</p>
 <p>s=0<br>for ((i=1; i&lt;=$nu; i=i+1))<br>do<br>    s=$(($s+$i))<br>done<br>echo “The result of ‘1+2+3+…+$nu’ is ==&gt; $s”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## shell script的追踪与调试</span><br><span class="line">我们可用不需要执行脚本就可用判断是否有问题，我们直接以bash的相关参数来进行判断!</span><br></pre></td></tr></table></figure>
+<p>sh [-nvx] scripts.sh<br>参数:<br>-n : 不要执行script，仅查询语法的问题<br>-v : 在执行script前，先将script的内容输出到屏幕上<br>-x : 将使用到的script内容显示到屏幕上，这是很有用的参数</p>
 <pre><code></code></pre>
       
 
