@@ -185,6 +185,12 @@
 <p>#userdel<br>这个命令用来删除用户的相关数据，而用户的数据有:<br>用户账号/密码相关参数: /etc/passwd,/etc/shadow<br>用户组相关参数: /etc/group,/etc/shadow<br>用户个人文件数据: /home/username, /var/spool/mail/username<br>语法如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userdel [-r] username</span><br><span class="line">参数:</span><br><span class="line">-r: 连同用户的主文件夹也一起删除</span><br></pre></td></tr></table></figure>
 <p>一般而言,如果该账号只是暂时不启用的话，那么将/etc/shadow里面账号失效日期(第八字段)设置为0就可以让该账号无法使用，但是所有和该账号有关的数据都会留下来，使用userdel的时机是通常是你真的确定不要让用户在主机上面使用任何数据了。</p>
+<p>##新增用户组和删除用户组<br>用户组的内容基本都与这两个文件有关:/etc/group,/etc/gshadow。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">新建用户组:</span><br><span class="line">groupadd [-g gid] [-r ] 用户组名</span><br><span class="line">参数:</span><br><span class="line">-g: 后面接某个特定的GID，用来直接给予某个GID。</span><br><span class="line">-r: 新建系统用户组。与&#x2F;etc&#x2F;login.defs内的GID_MIN有关。</span><br><span class="line"></span><br><span class="line">进行group相关参数的修改:</span><br><span class="line">groupmod [-g gid ] [-n group_name] 用户组名</span><br><span class="line">参数:</span><br><span class="line">-g: 修改既有的GID数字。</span><br><span class="line">-n: 修改既有的组名。</span><br><span class="line"></span><br><span class="line">删除用户组:</span><br><span class="line">groupdel [groupname]</span><br></pre></td></tr></table></figure>
+
+
+
+
 
       
 
