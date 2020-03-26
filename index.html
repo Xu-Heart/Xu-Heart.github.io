@@ -152,6 +152,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux账号管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/21/linux%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86/">linux账号管理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/21/linux%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-03-21T06:12:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-新增与删除用户-useradd-相关配置文件，passwd，usermod，userdel"><a href="#1-新增与删除用户-useradd-相关配置文件，passwd，usermod，userdel" class="headerlink" title="1.新增与删除用户 useradd,相关配置文件，passwd，usermod，userdel"></a>1.新增与删除用户 useradd,相关配置文件，passwd，usermod，userdel</h2><p>我们可以使用useradd来新建用户，密码的给予则使用passwd这个命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd [-u UID] [-g 初始用户组] [-G 次要用户组] [-mM] [-c 说明栏] [-d 主文件夹绝对路径] [-s shell] 用户账号名</span><br></pre></td></tr></table></figure>
+<p>其实系统已经帮我们规定好非常多的默认值了，所以我们可以简单的使用”useradd 账号”来创建用户即可。centos的这些默认值主要会帮我们处理几个项目：<br>1.在/etc/passwd里面创建一行与账号相关的数据，包括创建UID/GID/主文件夹等<br>2.在/etc/shadow中将此账号的密码相关参数填入，但是尚未有密码<br>3.在/etc/group中加入一个和账号名称一模一样的组名。<br>4.在/home下面创建一个与账号同名的目录作为用户主文件夹，且权限为700<br>另外，我们还要使用”passwd账号”来给予密码才算是完成了用户创建的流程。</p>
+<p>你有没有想过，为何”useradd vbird1”会主动在/home/vbird1中创建用户的主文件夹？主文件夹内有什么数据且来自哪里？为何默认使用的是/bin/bash这个shell?为何密码字段已经规定好了？这些其实都和useradd所使用的参考文件有关。</p>
+<h3 id="useradd参考文件"><a href="#useradd参考文件" class="headerlink" title="useradd参考文件"></a>useradd参考文件</h3><p>useradd的默认值可以使用下面的方法调用出来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xhs@ubuntu-14:~$ useradd -D</span><br><span class="line">GROUP&#x3D;100		&lt;&#x3D;&#x3D; 默认的用户组</span><br><span class="line">HOME&#x3D;&#x2F;home		&lt;&#x3D;&#x3D; 默认的主文件夹所在路径</span><br><span class="line">INACTIVE&#x3D;-1		&lt;&#x3D;&#x3D; 密码失效日，在shadow内的第七列</span><br><span class="line">EXPIRE&#x3D;			&lt;&#x3D;&#x3D; 账号失效日，在shadow内的第八列</span><br><span class="line">SHELL&#x3D;&#x2F;bin&#x2F;sh		&lt;&#x3D;&#x3D; 默认的shell</span><br><span class="line">SKEL&#x3D;&#x2F;etc&#x2F;skel		&lt;&#x3D;&#x3D; 用户主文件夹的内容数据参考目录</span><br><span class="line">CREATE_MAIL_SPOOL&#x3D;no	&lt;&#x3D;&#x3D; 是否主动帮用户创建邮件信箱</span><br></pre></td></tr></table></figure>
+
+<p>#passwd<br>使用useradd创建了账号之后，在默认的情况下，该账号是暂时被封锁的，也就是说，该账号是无法登陆的。所以我们就需要设置密码。设置密码就需要用到passwd。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">passwd [--stdin]</span><br><span class="line">passwd [-l] [-u] [--stdin] [-S] [-n 日期] [-w 日数] [-i 日期] 账号</span><br><span class="line">参数:</span><br><span class="line">--stdin: 可以通过来自前一个管道的数据，作为密码输入，对shell script 有帮助。</span><br><span class="line">-l : 是lock的意思，会将&#x2F;etc&#x2F;shadow第二列最前面加上!使密码失效。</span><br><span class="line">-u: 与-l相对，是unlock的意思。</span><br><span class="line">-S: 列出密码相关参数，即shadow文件内的大部分信息。</span><br><span class="line">-n: 后面接天数，shadow的第4字段，多久不可修改密码天数。</span><br><span class="line">-x: 后面接天数，shadow的第5字段，多久内必须要改动密码。</span><br><span class="line">-w: 后面接天数，密码过期前的警告天数。</span><br><span class="line">-i: 后面接日期，shadow的第7字段，密码失效日期。</span><br></pre></td></tr></table></figure>
+<p>当我们要给予用户密码时，通过root来设置即可。root可以设置各式各样的密码。注意：要帮一般账号新建密码使用”passwd 账号”的格式，使用”passwd”表示修改自己的密码。       </p>
+<p>#userdel<br>这个命令用来删除用户的相关数据，而用户的数据有:<br>用户账号/密码相关参数: /etc/passwd,/etc/shadow<br>用户组相关参数: /etc/group,/etc/shadow<br>用户个人文件数据: /home/username, /var/spool/mail/username<br>语法如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">userdel [-r] username</span><br><span class="line">参数:</span><br><span class="line">-r: 连同用户的主文件夹也一起删除</span><br></pre></td></tr></table></figure>
+<p>一般而言,如果该账号只是暂时不启用的话，那么将/etc/shadow里面账号失效日期(第八字段)设置为0就可以让该账号无法使用，但是所有和该账号有关的数据都会留下来，使用userdel的时机是通常是你真的确定不要让用户在主机上面使用任何数据了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/21/linux%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-shell-scripts中的循环" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -799,82 +874,6 @@ Bird2       43000   42000   41000
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/02/29/%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4%E4%B9%8B-xargs/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">使用hexo 搭建个人博客</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-02-28T02:20:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.安装nodejs<br>2.安装git<br>3.安装hexo<br>更改镜像源：</p>
-<p>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
-<p>全局安装hexo</p>
-<p>cnpm install -g hexo-cli</p>
-<p>新建blog目录， 以后自己的博客就放在这个目录下</p>
-<p>mkdir blog</p>
-<p>使用hexo初始化blog目录</p>
-<p>cd blog<br>hexo init</p>
-<p>在本地浏览博客</p>
-<p>hexo s</p>
-<p>将博客推送到远端，以便大家都能访问。<br>1.在github上新建项目， 注意项目名称必须是：你的github名称.github.io 。</p>
-<p>2.打开新建的项目， 选择setting， 下滑到github pages</p>
-<p>3.修改blog目录下的配置文件_config.yml，添加下面的内容：<br>deploy:<br>  type: git<br>  repo: <a href="https://github.com/Xu-Heart/Xu-Heart.github.io.git" target="_blank" rel="noopener">https://github.com/Xu-Heart/Xu-Heart.github.io.git</a><br>  branch: master</p>
-<pre><code>1.</code></pre><p>下载把博客部署到远端需要用到的插件<br>cnpm install –save hexo-deployer-git</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
         </p>
       
 
